@@ -32,7 +32,7 @@ const checkIfEventHasPassed = (date) => {
         const field = core.getInput('field');
         const value = getValue();
 
-        const posts = await api.posts.browse();
+        const posts = await api.posts.browse({limit: 'all'});
 
         await Promise.all(posts.map(async (post) => {
 
