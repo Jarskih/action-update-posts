@@ -26,7 +26,7 @@ const checkIfEventHasPassed = (date) => {
         const api = new GhostAdminApi({
             url: core.getInput('api-url'),
             key: core.getInput('api-key'),
-            version: 'canary'
+            version: "v3"
         });
 
         const field = core.getInput('field');
