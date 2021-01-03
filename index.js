@@ -34,7 +34,7 @@ const checkIfEventHasPassed = (date) => {
         const value = getValue();
         const days = core.getInput('days');
 
-        const posts = await api.posts.browse({filter: `tag:${tag}`});
+        const posts = await api.posts.browse();
 
         await Promise.all(posts.map(async (post) => {
 
