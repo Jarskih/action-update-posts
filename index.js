@@ -15,12 +15,11 @@ const getValue = () => {
     return value;
 };
 
-const calculateDaysSince = (date) => {
+const checkIfEventHasPassed = (date) => {
     const now = new Date();
     const then = new Date(date);
-
-    return Math.round((now - then) / (1000 * 60 * 60 * 24));
-};
+    return now > then;
+}
 
 (async function main() {
     try {
@@ -38,17 +37,15 @@ const calculateDaysSince = (date) => {
         const posts = await api.posts.browse({filter: `tag:${tag}`});
 
         await Promise.all(posts.map(async (post) => {
-            const differenceInDays = calculateDaysSince(post.published_at);
 
-            console.log(`Post "${post.title}" published ${differenceInDays} days ago`);
+            const hasPassed = checkIfEventHasPassed(post.published_at);
 
-            // If enough days have passed, we will update the post
-            if (differenceInDays > days) {
+            if (hasPassed) {
                 post[field] = value;
                 console.log(`Updating post "${post.title}"`);
                 await api.posts.edit(post);
             } else {
-                console.log(`Not updating post "${post.title}", ${days - differenceInDays + 1} days to go`);
+                console.log(`Not updating post "${post.title}"`);
             }
         }));
     } catch (err) {
