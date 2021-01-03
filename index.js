@@ -29,10 +29,8 @@ const checkIfEventHasPassed = (date) => {
             version: 'canary'
         });
 
-        const tag = core.getInput('tag');
         const field = core.getInput('field');
         const value = getValue();
-        const days = core.getInput('days');
 
         const posts = await api.posts.browse({});
 
