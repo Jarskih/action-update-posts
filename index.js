@@ -40,10 +40,10 @@ const checkIfEventHasPassed = (date) => {
 
             if (hasPassed) {
                 post[field] = value;
-                console.log(`Updating post "${post.title}"`);
                 await api.posts.edit(post);
             } else {
-                console.log(`Not updating post "${post.title}"`);
+                post[field] = !value;
+                await api.posts.edit(post);
             }
         }));
     } catch (err) {
