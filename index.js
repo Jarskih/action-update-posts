@@ -41,15 +41,6 @@ const checkIfEventHasPassed = (date) => {
             console.log(`Updating post "${post.title}": "${value}"`);
         }));
 
-        const upcomingPosts = await api.posts.browse({
-            filter: `published_at:>" + ${Date.now()}`
-        });
-
-        await Promise.all(upcomingPosts.map(async (post) => {
-            post[field] = !value;
-            console.log(`Updating post "${post.title}": "${!value}"`);
-        }));
-
     } catch (err) {
         console.error(err);
         process.exit(1);
